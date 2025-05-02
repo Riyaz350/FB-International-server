@@ -25,11 +25,7 @@ async function dbConnect() {
         console.log('MongoDB connected successfully');
         
         // Log connection state
-        console.log('Connection state:', {
-            isConnected: connection.isConnected,
-            host: db.connection.host,
-            name: db.connection.name
-        });
+        
 
         // Handle connection errors
         db.connection.on('error', (err) => {
