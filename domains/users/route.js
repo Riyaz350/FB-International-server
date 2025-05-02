@@ -1,6 +1,8 @@
 const express = require("express");
 const { createUser, verifyUserPin } = require("./controller");
+const {createToken , decodeToken} = require("./../../utils/createToken");
 const dbConnect = require("../../config/db");
+const user = require("./model");
 
 const router = express.Router();
 
@@ -31,14 +33,38 @@ router.post("/verify", async (req, res) => {
     try {
         await dbConnect();
         const { identifier, pin } = req.body;
+
         const result = await verifyUserPin( identifier , pin);
-        if (result.success) {
-            res.status(200).json({ isMatch: result.isMatch });
+
+        if (result.isMatch) {
+            const token = await createToken({ identifier });
+            res.status(200).json({ isMatch: result.isMatch, token: token });
         } else {
             res.status(500).json({ error: result.error });
         }
     } catch (error) {
         res.status(500).json({ error: "Failed to verify user pin" });
+    }
+});
+
+router.post("/verifyToken", async (req, res) => {
+    try {
+        await dbConnect();
+        const { token } = req.body;
+        const decoded = await decodeToken(token);
+        // console.log(decoded)
+        if (!decoded) {
+            return res.status(401).json({ error: "Invalid token" });
+        }
+
+        const userData = await user.findOne({ $or: [{ mobile: decoded.identifier }, { email: decoded.identifier }] });
+        if (!userData) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json(userData);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to verify token" });
     }
 });
 
