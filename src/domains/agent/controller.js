@@ -1,5 +1,5 @@
 const { hashData, verifyHashedData } = require("./../../utils/hashed");
-const agent = require("./model");
+const agent = require("../schema/agent");
 
 
 

@@ -2,7 +2,7 @@ const express = require("express");
 const { createUser, verifyUserPin, updateUserBalance } = require("./controller");
 const {createToken , decodeToken} = require("./../../utils/createToken");
 const dbConnect = require("../../config/db");
-const user = require("./model");
+const user = require("../schema/user");
 
 const router = express.Router();
 
@@ -59,7 +59,7 @@ router.post("/verifyPin", async (req, res) => {
     try {
         await dbConnect();
         const { identifier, pin } = req.body;
-
+        
         const result = await verifyUserPin( identifier , pin);
 
         if (result.isMatch) {

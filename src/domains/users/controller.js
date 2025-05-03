@@ -1,4 +1,4 @@
-const user = require("./model");
+const user = require("../schema/user");
 const { hashData, verifyHashedData } = require("./../../utils/hashed");
 const {createToken , decodeToken} = require("./../../utils/createToken");
 
@@ -32,7 +32,6 @@ const verifyUserPin = async (identifier , pin) => {
 const updateUserBalance = async (userId, balance) => {
     try {
         const existingUser = await user.findOne({ _id: userId });
-        console.log(existingUser)
         if (!existingUser) {
             return { success: false, error: "User not found" };
         }
