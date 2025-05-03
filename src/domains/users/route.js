@@ -18,6 +18,16 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/allUsers", async (req, res) => {
+    try {
+        await dbConnect();
+        const users = await user.find({});
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch users" });
+    }
+});
+
 router.post("/", async (req, res) => {
     try {
         await dbConnect();
@@ -29,7 +39,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.post("/verify", async (req, res) => {
+router.post("/verifyPin", async (req, res) => {
     try {
         await dbConnect();
         const { identifier, pin } = req.body;
