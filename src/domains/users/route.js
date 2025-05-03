@@ -39,6 +39,26 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.post("/verifyAgent", async (req, res) => {
+    try {
+        await dbConnect();
+        const { userId } = req.body;
+        const existingUser = await user.findOne({ _id: userId });
+
+        if (!existingUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        existingUser.verified = true;
+        existingUser.balance = (existingUser.balance || 0) + 100000; // Add 100000 to balance
+        await existingUser.save();
+
+        res.status(200).json({ message: "User verified successfully", user: existingUser });
+    } catch (error) {
+        res.status(500).json({ error: "Failed to verify agent" });
+    }
+});
+
 router.post("/verifyPin", async (req, res) => {
     try {
         await dbConnect();
