@@ -7,17 +7,15 @@
     "dev": "nodemon src/index.js",
     "build": "echo 'No build step required'",
     "vercel-build": "echo 'No build step required'"
-  
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "FB International Server API",
+  "description": "",
   "engines": {
     "node": ">=14.0.0"
   },
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
@@ -26,8 +24,6 @@
     "mongoose": "^8.14.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10",
-    "eslint": "^8.56.0",
-    "jest": "^29.7.0"
+    "nodemon": "^3.1.10"
   }
 }
