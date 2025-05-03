@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const agentSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -35,9 +35,6 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    token: {
-        type: String,
-    },
     balance: {
         type: Number,
         default: 0,
@@ -52,6 +49,6 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-const user = mongoose.models.User || mongoose.model("User", userSchema);
+const agent = mongoose.models.Agents || mongoose.model("Agents", agentSchema);
 
-module.exports = user;
+module.exports = agent;

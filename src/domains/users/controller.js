@@ -29,5 +29,23 @@ const verifyUserPin = async (identifier , pin) => {
 };
 
 
+const updateUserBalance = async (userId, balance) => {
+    try {
+        const existingUser = await user.findOne({ _id: userId });
+        console.log(existingUser)
+        if (!existingUser) {
+            return { success: false, error: "User not found" };
+        }
 
-module.exports = { createUser, verifyUserPin };
+        existingUser.verified = true;
+        existingUser.balance = (existingUser.balance || 0) + balance;
+        await existingUser.save();
+
+        return { success: true, user: existingUser };
+    } catch (error) {
+        return { success: false, error: error.message };
+    }
+};
+
+
+module.exports = { createUser, verifyUserPin, updateUserBalance };
