@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    income: {
+        type: Number,
+        default: 0,
+    },
 });
 
 const user = mongoose.models.User || mongoose.model("User", userSchema);
