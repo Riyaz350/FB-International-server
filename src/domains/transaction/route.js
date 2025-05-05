@@ -11,7 +11,6 @@ router.get("/transactions", async (req, res) => {
         const transactions = await transaction.find();
         res.status(200).json(transactions);
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: "Failed to fetch transactions" });
     }
 });
@@ -51,7 +50,6 @@ router.post("/cashIn", async (req, res) => {
         res.status(200).json({ message: "CashIn transaction created successfully"  });
         
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: "Failed to process CashIn transaction" });
     }
 });
@@ -101,7 +99,6 @@ router.post("/sendMoney", async (req, res) => {
         res.status(200).json({ message: "SendMoney transaction created successfully"  });
         
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: "Failed to process SendMoney transaction" });
     }
 });

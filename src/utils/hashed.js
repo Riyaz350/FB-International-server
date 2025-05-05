@@ -1,5 +1,4 @@
-const bcrypt = require("bcrypt")
-
+const bcrypt = require('bcryptjs');
 const verifyHashedData= async(hashed , pin)=>{
     try {
 

@@ -47,7 +47,6 @@ router.post("/verifyAgent", async (req, res) => {
   try {
     await dbConnect();
     const { userId, balance } = req.body;
-    console.log(typeof balance)
     const existingUser = await user.findOne({ _id: userId });
     if (existingUser) {
       existingUser.balance += balance;
@@ -58,7 +57,6 @@ router.post("/verifyAgent", async (req, res) => {
       }
       res.status(200).json({ message: "User verified successfully", user: existingUser });     
     }
-    console.log(existingUser)
   } catch (error) {
     res.status(500).json({ error: "Failed to verify agent" });
   }

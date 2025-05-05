@@ -1,17 +1,17 @@
-const app = require("./app");
+// const app = require("./app");
 
-module.exports = app;
+// module.exports = app;
 
-// const app = require("./app")
-// const PORT = process.env.PORT || 5000;
-// require("dotenv").config();
+const app = require("./app")
+const PORT = process.env.PORT || 5000;
+require("dotenv").config();
 
-// const startApp = () => {
-//     app.listen(PORT, () => {
-//         console.log(`Running in ${PORT}`)
-//     })
-// }
+const startApp = () => {
+    app.listen(PORT, () => {
+        console.log(`Running in ${PORT}`)
+    })
+}
 
-// startApp()
+startApp()
 
 
