@@ -1,11 +1,4 @@
-const app = require("./app")
-const PORT = process.env.PORT || 5000;
-require("dotenv").config();
+// src/index.js
+const app = require("./app");
 
-const startApp = () => {
-    app.listen(PORT, () => {
-        console.log(`Running in ${PORT}`)
-    })
-}
-
-startApp()
+module.exports = app;
